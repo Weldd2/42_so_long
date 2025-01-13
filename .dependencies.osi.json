@@ -1,0 +1,13 @@
+{
+	"name": "push_swap",
+	"dependencies": [
+		{
+			"name": "pf",
+			"repo": "git@github.com:Weldd2/42_libamura_pf.git"
+		},
+		{
+			"name": "gnl",
+			"repo": "git@github.com:Weldd2/42_libamura_gnl.git"
+		}
+	]
+}
