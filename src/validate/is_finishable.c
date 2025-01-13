@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:47:42 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/13 19:49:51 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/13 23:53:17 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,10 @@ t_ok	bfs(t_map map, size_t x, size_t y, size_t c_count)
 
 t_ok	is_finishable(t_map map)
 {
-	return (bfs(map, map.p_x, map.p_y, map.c_count));
+	t_map	map_cpy;
+	t_ok	is_ok;
+
+	map_cpy = copy_map(map);
+	is_ok = bfs(map_cpy, map_cpy.p_x, map_cpy.p_y, map_cpy.c_count);
+	return (is_ok);
 }

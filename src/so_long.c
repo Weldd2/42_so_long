@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 12:36:11 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/13 20:18:40 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/14 00:01:34 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int	main(int argc, char **argv)
 	if (fd == -1)
 		return (g_eno = E_OPEN, ft_error(), E_ERR);
 	init_map(fd, &map);
-	if (validate(map) == E_ERR)
+	if (validate(&map) == E_ERR)
 		ft_error();
+	graph(map);
 	mem_mgc_free();
 	return (EXIT_SUCCESS);
 }

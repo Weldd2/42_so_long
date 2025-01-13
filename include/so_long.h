@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 12:38:50 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/13 20:02:14 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/14 00:04:00 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "MLX42.h"
 # include "gnl.h"
 # include "pf_printf.h"
+
+# define WIDTH 500
+# define HEIGHT 500
 
 typedef struct s_map
 {
@@ -62,12 +65,16 @@ typedef enum e_ok
 	E_ERR = 1
 }	t_ok;
 
-void	ft_error();
-void	init_map(int fd, t_map *map);
-t_ok	is_rectangular(t_map map);
-t_ok	is_closed(t_map map);
-t_ok	is_playable(t_map *map);
-t_ok	is_finishable(t_map map);
-t_ok	validate(t_map map);
+void			ft_error();
+void			init_map(int fd, t_map *map);
+t_ok			is_rectangular(t_map map);
+t_ok			is_closed(t_map map);
+t_ok			is_playable(t_map *map);
+t_ok			is_finishable(t_map map);
+t_ok			validate(t_map *map);
+t_map			copy_map(t_map original);
+void			free_assets(void);
+void			graph(t_map map);
+mlx_texture_t	*assets(char c);
 
 #endif
