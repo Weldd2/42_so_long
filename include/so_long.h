@@ -93,5 +93,6 @@ t_pos			dequeue(t_queue *queue);
 bool			**init_visited(size_t height, size_t width);
 void			free_visited(bool **visited, size_t height);
 t_ok			bfs(t_map *map, size_t start_y, size_t start_x);
+void			images_to_window(mlx_t *mlx, t_map map);
 
 #endif

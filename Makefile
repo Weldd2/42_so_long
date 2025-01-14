@@ -33,7 +33,7 @@ OSI_MODULE_SRCS = $(shell find $(LIB_DIR)/*/src -type f -name '*.c')
 MOD_OBJS = $(patsubst $(LIB_DIR)/%/src/%.c,$(OBJDIR)/modules/%/%.o,$(OSI_MODULE_SRCS))
 
 # Variables pour Valgrind
-VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --suppressions=valgrind_files/so_long.supp
 TEST_ARGUMENTS = "map.ber"
 
 # Règle par défaut
