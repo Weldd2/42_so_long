@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 12:38:50 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/14 00:04:00 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/14 18:56:37 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,19 @@
 # include "MLX42.h"
 # include "gnl.h"
 # include "pf_printf.h"
+# include <stdbool.h>
 
-# define WIDTH 500
-# define HEIGHT 500
+typedef struct s_pos {
+	size_t x;
+	size_t y;
+}	t_pos;
+
+typedef struct s_queue {
+	t_pos *data;
+	size_t front;
+	size_t rear;
+	size_t capacity;
+}	t_queue;
 
 typedef struct s_map
 {
@@ -50,14 +60,14 @@ typedef enum e_errno
 
 extern t_errno	g_eno;
 
-typedef enum e_bloc
+typedef struct	s_images
 {
-	E_PLANCHE = 0,
-	E_BRIQUE = 1,
-	E_FLEUR = 2,
-	E_ECHELLE = 3,
-	E_TNT = 4
-}	t_bloc;
+	mlx_image_t	*bloc0;
+	mlx_image_t	*bloc1;
+	mlx_image_t	*blocP;
+	mlx_image_t	*blocC;
+	mlx_image_t	*blocE;
+}	t_images;
 
 typedef enum e_ok
 {
@@ -70,11 +80,18 @@ void			init_map(int fd, t_map *map);
 t_ok			is_rectangular(t_map map);
 t_ok			is_closed(t_map map);
 t_ok			is_playable(t_map *map);
-t_ok			is_finishable(t_map map);
+t_ok			is_finishable(t_map *map);
 t_ok			validate(t_map *map);
 t_map			copy_map(t_map original);
 void			free_assets(void);
 void			graph(t_map map);
-mlx_texture_t	*assets(char c);
+t_queue			*init_queue(size_t capacity);
+void			free_queue(t_queue *queue);
+bool			is_empty(t_queue *queue);
+bool			enqueue(t_queue *queue, t_pos pos);
+t_pos			dequeue(t_queue *queue);
+bool			**init_visited(size_t height, size_t width);
+void			free_visited(bool **visited, size_t height);
+t_ok			bfs(t_map *map, size_t start_y, size_t start_x);
 
 #endif
