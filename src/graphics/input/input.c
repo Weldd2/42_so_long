@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphics.c                                         :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 23:58:20 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/14 22:09:23 by antoinemura      ###   ########.fr       */
+/*   Created: 2025/01/14 22:07:55 by antoinemura       #+#    #+#             */
+/*   Updated: 2025/01/14 22:09:18 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	graph(t_map map)
+void	direction_keyhook(mlx_key_data_t keydata, void* param)
 {
-	mlx_t	*mlx;
+	// If we PRESS the 'J' key, print "Hello".
+	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
+		puts("Hello ");
 
-	mlx = mlx_init(map.width * 32, map.height * 32, "42Balls", true);
-	mem_mgc_add_block((void *)mlx, (void *)(void *)mlx_terminate);
-	if (!mlx)
-		ft_error();
-	images_to_window(mlx, map);
-	mlx_key_hook(mlx, &direction_keyhook, NULL);
-	mlx_loop(mlx);
+	// If we RELEASE the 'K' key, print "World".
+	if (keydata.key == MLX_KEY_K && keydata.action == MLX_RELEASE)
+		puts("World");
+
+	// If we HOLD the 'L' key, print "!".
+	if (keydata.key == MLX_KEY_L && keydata.action == MLX_REPEAT)
+		puts("!");
 }
