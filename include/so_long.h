@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 12:38:50 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/14 18:56:37 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/14 22:09:12 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ bool			**init_visited(size_t height, size_t width);
 void			free_visited(bool **visited, size_t height);
 t_ok			bfs(t_map *map, size_t start_y, size_t start_x);
 void			images_to_window(mlx_t *mlx, t_map map);
+void			direction_keyhook(mlx_key_data_t keydata, void* param);
 
 #endif
