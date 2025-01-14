@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 12:36:11 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/14 19:51:05 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/14 19:59:09 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,3 @@ int	main(int argc, char **argv)
 	mem_mgc_free();
 	return (EXIT_SUCCESS);
 }
-
-// TODO : refactor les images (on peut afficher plusieurs instances d'une image plutot que malloc 50 images 🤡)
