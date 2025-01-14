@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   images.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
+/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 23:59:53 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/14 19:58:37 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/14 23:53:05 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,34 +52,48 @@ static mlx_image_t	*get_image_by_tile(t_images *images, char tile)
 	return (NULL);
 }
 
+static void	draw_tile(mlx_t *mlx, t_map map, t_images images, t_pos pos)
+{
+	mlx_image_t	*image;
+	size_t		z_img;
+
+	z_img = 0;
+	image = get_image_by_tile(&images, '0');
+	mlx_image_to_window(mlx, image, pos.x * 32, pos.y * 32);
+	image->instances[image->count - 1].z = z_img;
+	if (map.tiles[pos.y][pos.x] == 'E' \
+		|| map.tiles[pos.y][pos.x] == 'C' \
+		|| map.tiles[pos.y][pos.x] == '1')
+		z_img = 1;
+	if (map.tiles[pos.y][pos.x] == 'P')
+		z_img = 2;
+	image = get_image_by_tile(&images, map.tiles[pos.y][pos.x]);
+	mlx_image_to_window(mlx, image, pos.x * 32, pos.y * 32);
+	image->instances[image->count - 1].z = z_img;
+}
+
 static void	draw_map_images(mlx_t *mlx, t_map map, t_images images)
 {
-	size_t		y;
-	size_t		x;
-	mlx_image_t	*image;
+	t_pos		pos;
 
-	y = 0;
-	while (y < map.height)
+	pos.y = 0;
+	while (pos.y < map.height)
 	{
-		x = 0;
-		while (x < map.width)
+		pos.x = 0;
+		while (pos.x < map.width)
 		{
-			image = get_image_by_tile(&images, '0');
-			if (image)
-				mlx_image_to_window(mlx, image, x * 32, y * 32);
-			image = get_image_by_tile(&images, map.tiles[y][x]);
-			if (image)
-				mlx_image_to_window(mlx, image, x * 32, y * 32);
-			x++;
+			draw_tile(mlx, map, images, pos);
+			pos.x++;
 		}
-		y++;
+		pos.y++;
 	}
 }
 
-void	images_to_window(mlx_t *mlx, t_map map)
+t_images	images_to_window(mlx_t *mlx, t_map map)
 {
 	t_images	images;
 
 	images = load_images(mlx);
 	draw_map_images(mlx, map, images);
+	return (images);
 }

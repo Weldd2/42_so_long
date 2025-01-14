@@ -33,7 +33,7 @@ OSI_MODULE_SRCS = $(shell find $(LIB_DIR)/*/src -type f -name '*.c')
 MOD_OBJS = $(patsubst $(LIB_DIR)/%/src/%.c,$(OBJDIR)/modules/%/%.o,$(OSI_MODULE_SRCS))
 
 # Variables pour Valgrind
-VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --suppressions=valgrind_files/so_long.supp
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --suppressions=valgrind_files/so_long.supp --suppressions=valgrind_files/mlx42.supp
 TEST_ARGUMENTS = "map.ber"
 
 # Règle par défaut
@@ -58,6 +58,10 @@ install_deps:
 	@echo "Installation des dépendances..."
 	@./.install.osi.sh
 	@echo "Dépendances installées."
+
+mlx_install:
+	git clone https://github.com/codam-coding-college/MLX42.git
+	make mlx_build
 
 mlx_build:
 	cd MLX42 && \

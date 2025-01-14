@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
+/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:07:55 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/14 22:09:18 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/14 23:24:24 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 void	direction_keyhook(mlx_key_data_t keydata, void* param)
 {
-	// If we PRESS the 'J' key, print "Hello".
-	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
-		puts("Hello ");
+	t_images	*images;
 
-	// If we RELEASE the 'K' key, print "World".
-	if (keydata.key == MLX_KEY_K && keydata.action == MLX_RELEASE)
-		puts("World");
-
-	// If we HOLD the 'L' key, print "!".
-	if (keydata.key == MLX_KEY_L && keydata.action == MLX_REPEAT)
-		puts("!");
+	images = (t_images *)param;
+	images->blocP->instances[0].z = 2;
+	if (mlx_is_key_down(param, MLX_KEY_ESCAPE))
+		mlx_close_window(param);
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+		images->blocP->instances[0].y -= 32;
+	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
+		images->blocP->instances[0].x -= 32;
+	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+		images->blocP->instances[0].y += 32;
+	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
+		images->blocP->instances[0].x += 32;
 }
+	
