@@ -1,3 +1,7 @@
 *.o
 .vscode
 so_long
+map.ber
+MLX42/
+build/
+lib/
