@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:00:52 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/21 14:33:22 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/21 15:55:05 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	printerr(void)
 {
 	static const char	*errstr[] = {\
 		[E_GLOBAL] = "An error occured", \
+		[E_ALLOC] = "Allocation Failed", \
 		[E_OPEN] = "Could not open file.", \
 		[E_ARGS] = "1 argument expected.", \
 		[E_MAPEMPTY] = "Map is empty", \

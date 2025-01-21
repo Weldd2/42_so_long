@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 23:59:53 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/21 15:06:14 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/21 15:57:59 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static mlx_image_t	*load_single_image(mlx_t *mlx, const char *path)
 
 	texture = mlx_load_png(path);
 	if (!texture)
-		ft_error();
+		return (g_eno = E_ALLOC, ft_error(), NULL);
 	image = mlx_texture_to_image(mlx, texture);
 	mlx_delete_texture(texture);
 	return (image);
@@ -59,7 +59,8 @@ static void	draw_tile(mlx_t *mlx, t_map map, t_images images, t_pos pos)
 
 	z_img = 0;
 	image = get_image_by_tile(&images, '0');
-	mlx_image_to_window(mlx, image, pos.x * 32, pos.y * 32);
+	if (mlx_image_to_window(mlx, image, pos.x * 32, pos.y * 32) == -1)
+		return (g_eno = E_ALLOC, ft_error());
 	image->instances[image->count - 1].z = z_img;
 	if (map.tiles[pos.y][pos.x] == 'E' \
 		|| map.tiles[pos.y][pos.x] == 'C' \

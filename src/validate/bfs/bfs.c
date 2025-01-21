@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:29:02 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/14 19:47:25 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/21 16:00:46 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ bool	**init_visited(size_t height, size_t width)
 
 	visited = mem_malloc(sizeof(bool *) * height);
 	if (!visited)
-		ft_error();
+		return (g_eno = E_ALLOC, ft_error(), NULL);
 	y = 0;
 	while (y < height)
 	{
 		x = 0;
 		visited[y] = mem_malloc(sizeof(bool) * width);
 		if (!visited[y])
-			ft_error();
+			return (g_eno = E_ALLOC, ft_error(), NULL);
 		while (x < width)
 		{
 			visited[y][x] = false;

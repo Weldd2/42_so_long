@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:27:26 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/14 19:32:03 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/21 15:59:44 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,12 @@ t_queue	*init_queue(size_t capacity)
 	t_queue	*queue;
 
 	queue = mem_malloc(sizeof(t_queue));
+	if (!queue)
+		return (g_eno = E_ALLOC, ft_error(), NULL);
 	queue->capacity = capacity;
 	queue->data = mem_malloc(capacity * sizeof(t_pos));
+	if (!queue->data)
+		return (g_eno = E_ALLOC, ft_error(), NULL);
 	queue->front = 0;
 	queue->rear = 0;
 	return (queue);
