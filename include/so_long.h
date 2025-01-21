@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 12:38:50 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/21 15:55:29 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/21 16:57:08 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef enum e_errno
 	E_GLOBAL,
 	E_ALLOC,
 	E_OPEN,
+	E_FILENAME,
 	E_ARGS,
 	E_MAPEMPTY,
 	E_MAPWIDTH,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:00:52 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/21 16:36:10 by amura            ###   ########.fr       */
+/*   Updated: 2025/01/21 16:57:41 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	printerr(void)
 	static const char	*errstr[] = {\
 		[E_GLOBAL] = "An error occured", \
 		[E_ALLOC] = "Allocation Failed", \
+		[E_FILENAME] = "File name must finish with .ber", \
 		[E_OPEN] = "Could not open file.", \
 		[E_ARGS] = "1 argument expected.", \
 		[E_MAPEMPTY] = "Map is empty", \

@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 12:36:11 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/14 19:59:09 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/21 16:58:06 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (g_eno = E_ARGS, ft_error(), E_ERR);
+	if (str_strendwith(argv[1], ".ber") != 1)
+		return (g_eno = E_FILENAME, ft_error(), E_ERR);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (g_eno = E_OPEN, ft_error(), E_ERR);
