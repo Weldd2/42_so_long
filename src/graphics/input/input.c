@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:07:55 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/21 15:33:42 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/21 15:40:21 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	handle_escape(t_map *map, mlx_t *mlx)
 		mlx_close_window(mlx);
 }
 
-static void	direction_keyhook(mlx_key_data_t keydata, void *param)
+void	direction_keyhook(mlx_key_data_t keydata, void *param)
 {
 	t_game			*game;
 	static size_t	count = 0;
