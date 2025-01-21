@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
+/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:00:52 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/21 15:55:05 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/21 16:36:10 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	printerr(void)
 	};
 
 	if (errstr[g_eno])
-		pf_printf("Error \n%s\n", errstr[g_eno]);
+		pf_printf("Error\n%s\n", errstr[g_eno]);
 }
 
 void	ft_error(void)
