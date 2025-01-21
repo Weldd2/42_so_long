@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:48:57 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/21 14:54:29 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/21 16:44:32 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static int	init_map_tiles(int fd, t_map *map)
 		mem_mgc_add_block(map->tiles[index], mem_free);
 		index++;
 	}
-	mem_mgc_add_block(map->tiles, mem_free);
+	if (map->tiles != NULL)
+		mem_mgc_add_block(map->tiles, mem_free);
 	return (index);
 }
 
@@ -56,6 +57,8 @@ void	init_map(int fd, t_map *map)
 	size_t	index;
 
 	index = init_map_tiles(fd, map);
+	if (index == 0)
+		return (g_eno = E_MAPEMPTY, ft_error());
 	map->height = index;
 	map->width = str_strlen(map->tiles[0]);
 	map->p_x = 0;
