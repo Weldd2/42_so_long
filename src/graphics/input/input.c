@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
+/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:07:55 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/21 15:40:21 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/21 16:11:15 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static t_ok	handle_collision(mlx_key_data_t keydata, t_map *map)
+static t_ok	handle_collision(mlx_key_data_t keydata, t_map *map, mlx_t *mlx)
 {
 	if (keydata.key == MLX_KEY_W)
 		return (map->tiles[map->p_y - 1][map->p_x] == '1');
@@ -22,6 +22,8 @@ static t_ok	handle_collision(mlx_key_data_t keydata, t_map *map)
 		return (map->tiles[map->p_y][map->p_x - 1] == '1');
 	if (keydata.key == MLX_KEY_D)
 		return (map->tiles[map->p_y][map->p_x + 1] == '1');
+	if (keydata.key == MLX_KEY_ESCAPE)
+		mlx_close_window(mlx);
 	return (E_ERR);
 }
 
@@ -83,7 +85,7 @@ void	direction_keyhook(mlx_key_data_t keydata, void *param)
 
 	game = (t_game *)param;
 	if (keydata.action == MLX_PRESS
-		&& handle_collision(keydata, game->map) == E_OK)
+		&& handle_collision(keydata, game->map, game->mlx) == E_OK)
 	{
 		handle_move(keydata, game->map, game->images);
 		handle_collect(game->map, game->images);
