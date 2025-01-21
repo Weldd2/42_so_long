@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 23:58:20 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/21 15:56:35 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/21 16:51:21 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	graph(t_map map)
 	t_images	images;
 
 	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx = mlx_init(map.width * 32, map.height * 32, "42Balls", true);
+	mlx = mlx_init(map.width * 32, map.height * 32, "IL EST PAS BO ?", true);
 	if (!mlx)
 		return (g_eno = E_ALLOC, ft_error());
 	mem_mgc_add_block((void *)mlx, (void *)(void *)mlx_terminate);
