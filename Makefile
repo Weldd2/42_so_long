@@ -39,6 +39,8 @@ TEST_ARGUMENTS = "map.ber"
 # Règle par défaut
 all: $(NAME)
 
+install: install_deps mlx_install
+
 # Règle de liaison pour créer l'exécutable
 $(NAME): $(OBJS) $(MOD_OBJS)
 	$(CC) $(CFLAGS) $(OSI_INCLUDE_FLAGS) $(OBJS) $(MOD_OBJS) $(LIBS) -o $(NAME)
