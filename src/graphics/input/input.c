@@ -3,30 +3,92 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:07:55 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/14 23:24:24 by amura            ###   ########.fr       */
+/*   Updated: 2025/01/21 15:08:35 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+t_ok	handle_collision(mlx_key_data_t keydata, t_map *map)
+{
+	if (keydata.key == MLX_KEY_W)
+		return (map->tiles[map->p_y - 1][map->p_x] == '1');
+	if (keydata.key == MLX_KEY_S)
+		return (map->tiles[map->p_y + 1][map->p_x] == '1');
+	if (keydata.key == MLX_KEY_A)
+		return (map->tiles[map->p_y][map->p_x - 1] == '1');
+	if (keydata.key == MLX_KEY_D)
+		return (map->tiles[map->p_y][map->p_x + 1] == '1');
+	return (E_ERR);
+}
+
+void	handle_move(mlx_key_data_t keydata, t_map *map, t_images *images)
+{
+	if (keydata.key == MLX_KEY_W)
+	{
+		images->blocP->instances[0].y -= 32;
+		map->p_y--;
+	}
+	if (keydata.key == MLX_KEY_S)
+	{
+		images->blocP->instances[0].y += 32;
+		map->p_y++;
+	}
+	if (keydata.key == MLX_KEY_A)
+	{
+		images->blocP->instances[0].x -= 32;
+		map->p_x--;
+	}
+	if (keydata.key == MLX_KEY_D)
+	{
+		images->blocP->instances[0].x += 32;
+		map->p_x++;
+	}
+}
+
+void	handle_collect(t_map *map, t_images *images)
+{
+	size_t			i;
+
+	i = 0;
+	if (map->tiles[map->p_y][map->p_x] == 'C')
+	{
+		map->c_count--;
+		while (i < images->blocC->count)
+		{
+			if ((size_t)images->blocC->instances[i].x == map->p_x * 32 &&
+				(size_t)images->blocC->instances[i].y == map->p_y * 32)
+			{
+				images->blocC->instances[i].z--;
+				map->tiles[map->p_y][map->p_x] = '0';
+			}
+			i++;
+		}
+	}
+}
+
+void	handle_escape(t_map *map, mlx_t *mlx)
+{
+	if (map->tiles[map->p_y][map->p_x] == 'E' && map->c_count == 0)
+		mlx_close_window(mlx);
+}
+
 void	direction_keyhook(mlx_key_data_t keydata, void* param)
 {
-	t_images	*images;
+	t_game			*game;
+	static size_t	count = 0;
 
-	images = (t_images *)param;
-	images->blocP->instances[0].z = 2;
-	if (mlx_is_key_down(param, MLX_KEY_ESCAPE))
-		mlx_close_window(param);
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		images->blocP->instances[0].y -= 32;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		images->blocP->instances[0].x -= 32;
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		images->blocP->instances[0].y += 32;
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		images->blocP->instances[0].x += 32;
+	game = (t_game *)param;
+	if (keydata.action == MLX_PRESS && handle_collision(keydata, game->map) == E_OK)
+	{
+		handle_move(keydata, game->map, game->images);
+		handle_collect(game->map, game->images);
+		count++;
+		pf_printf("%d\n", count);
+		handle_escape(game->map, game->mlx);
+	}
 }
 	

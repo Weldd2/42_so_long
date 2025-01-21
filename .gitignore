@@ -1,7 +1,11 @@
-*.o
+*.dSYM
+map.ber
+so_long
+lib/*
 .vscode
 so_long
 map.ber
 MLX42/
 build/
 lib/
+obj

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 23:58:20 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/14 23:15:38 by amura            ###   ########.fr       */
+/*   Updated: 2025/01/21 15:02:33 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,16 @@ void	graph(t_map map)
 	mlx_t		*mlx;
 	t_images	images;
 
+	mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx = mlx_init(map.width * 32, map.height * 32, "42Balls", true);
 	mem_mgc_add_block((void *)mlx, (void *)(void *)mlx_terminate);
 	if (!mlx)
 		ft_error();
 	images = images_to_window(mlx, map);
-	mlx_key_hook(mlx, &direction_keyhook, &images);
+	mlx_key_hook(mlx, &direction_keyhook, &(t_game){
+		.map = &map,
+		.mlx = mlx,
+		.images = &images
+	});
 	mlx_loop(mlx);
 }

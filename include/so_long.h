@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 12:38:50 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/14 23:15:06 by amura            ###   ########.fr       */
+/*   Updated: 2025/01/21 14:42:29 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,33 @@ typedef struct s_queue {
 	size_t capacity;
 }	t_queue;
 
+typedef struct	s_images
+{
+	mlx_image_t	*bloc0;
+	mlx_image_t	*bloc1;
+	mlx_image_t	*blocP;
+	mlx_image_t	*blocC;
+	mlx_image_t	*blocE;
+}	t_images;
+
 typedef struct s_map
 {
-	char	**tiles;
-	size_t	width;
-	size_t	height;
-	size_t	c_count;
-	size_t	e_count;
-	size_t	p_count;
-	size_t	p_x;
-	size_t	p_y;
+	char		**tiles;
+	size_t		width;
+	size_t		height;
+	size_t		c_count;
+	size_t		e_count;
+	size_t		p_count;
+	size_t		p_x;
+	size_t		p_y;
 }	t_map;
+
+typedef struct s_game
+{
+	t_map		*map;
+	mlx_t		*mlx;
+	t_images	*images;
+}	t_game;
 
 typedef enum e_errno
 {
@@ -60,15 +76,6 @@ typedef enum e_errno
 
 extern t_errno	g_eno;
 
-typedef struct	s_images
-{
-	mlx_image_t	*bloc0;
-	mlx_image_t	*bloc1;
-	mlx_image_t	*blocP;
-	mlx_image_t	*blocC;
-	mlx_image_t	*blocE;
-}	t_images;
-
 typedef enum e_ok
 {
 	E_OK = 0,
@@ -82,7 +89,6 @@ t_ok			is_closed(t_map map);
 t_ok			is_playable(t_map *map);
 t_ok			is_finishable(t_map *map);
 t_ok			validate(t_map *map);
-t_map			copy_map(t_map original);
 void			free_assets(void);
 void			graph(t_map map);
 t_queue			*init_queue(size_t capacity);

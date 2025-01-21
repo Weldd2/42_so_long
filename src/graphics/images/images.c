@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   images.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 23:59:53 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/14 23:53:05 by amura            ###   ########.fr       */
+/*   Updated: 2025/01/21 15:06:14 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,12 @@ static void	draw_tile(mlx_t *mlx, t_map map, t_images images, t_pos pos)
 	image->instances[image->count - 1].z = z_img;
 }
 
-static void	draw_map_images(mlx_t *mlx, t_map map, t_images images)
+t_images	images_to_window(mlx_t *mlx, t_map map)
 {
+	t_images	images;
 	t_pos		pos;
 
+	images = load_images(mlx);
 	pos.y = 0;
 	while (pos.y < map.height)
 	{
@@ -87,13 +89,5 @@ static void	draw_map_images(mlx_t *mlx, t_map map, t_images images)
 		}
 		pos.y++;
 	}
-}
-
-t_images	images_to_window(mlx_t *mlx, t_map map)
-{
-	t_images	images;
-
-	images = load_images(mlx);
-	draw_map_images(mlx, map, images);
 	return (images);
 }

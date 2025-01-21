@@ -6,7 +6,7 @@
 /*   By: antoinemura <antoinemura@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:48:57 by antoinemura       #+#    #+#             */
-/*   Updated: 2025/01/13 23:57:29 by antoinemura      ###   ########.fr       */
+/*   Updated: 2025/01/21 14:54:29 by antoinemura      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,33 +49,6 @@ static int	init_map_tiles(int fd, t_map *map)
 	}
 	mem_mgc_add_block(map->tiles, mem_free);
 	return (index);
-}
-
-t_map	copy_map(t_map original)
-{
-	t_map	cpy;
-	char	**tiles;
-	size_t	y;
-
-	cpy.c_count = original.c_count;
-	cpy.e_count = original.e_count;
-	cpy.p_count = original.p_count;
-	cpy.height = original.height;
-	cpy.width = original.width;
-	cpy.p_x = original.p_x;
-	cpy.p_y = original.p_y;
-	tiles = mem_malloc(sizeof(char *) * original.height);
-	y = 0;
-	while (y < cpy.height)
-	{
-		tiles[y] = mem_malloc(original.width);
-		str_strlcpy(tiles[y], original.tiles[y], original.width + 1);
-		mem_mgc_add_block(tiles[y], mem_free);
-		y++;
-	}
-	cpy.tiles = tiles;
-	mem_mgc_add_block(tiles, mem_free);
-	return (cpy);
 }
 
 void	init_map(int fd, t_map *map)
